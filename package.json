@@ -1,0 +1,23 @@
+{
+  "name": "png-to-jpeg-converter",
+  "version": "1.0.0",
+  "description": "A web application to convert PNG images to JPEG format",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'Static website - open index.html in browser'",
+    "build": "echo 'No build process needed for static site'"
+  },
+  "keywords": [
+    "png",
+    "jpeg",
+    "converter",
+    "image",
+    "web"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/png-to-jpeg-converter.git"
+  }
+}

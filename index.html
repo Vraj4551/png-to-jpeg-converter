@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG to JPEG Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-image"></i> PNG to JPEG Converter</h1>
+            <p>Transform your PNG files to JPEG with just a few clicks</p>
+        </header>
+
+        <main class="main-content">
+            <div class="converter-box">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Drop your PNG file here</h3>
+                        <p>or <span class="browse-link">browse files</span></p>
+                        <input type="file" id="fileInput" accept=".png,image/png" hidden>
+                    </div>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-preview">
+                        <img id="previewImage" alt="Preview">
+                    </div>
+                    <div class="file-details">
+                        <h4 id="fileName"></h4>
+                        <p id="fileSize"></p>
+                        <div class="quality-controls">
+                            <label for="qualitySlider">JPEG Quality: <span id="qualityValue">85</span>%</label>
+                            <input type="range" id="qualitySlider" min="10" max="100" value="85" class="quality-slider">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="convertBtn" class="convert-btn" disabled>
+                        <i class="fas fa-exchange-alt"></i> Convert to JPEG
+                    </button>
+                    <button id="downloadBtn" class="download-btn" disabled>
+                        <i class="fas fa-download"></i> Download JPEG
+                    </button>
+                    <button id="resetBtn" class="reset-btn">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Converting...</p>
+                </div>
+
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorText"></span>
+                </div>
+
+                <div class="success-message" id="successMessage" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Conversion completed successfully!</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> How it works</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-upload"></i>
+                        <h4>Drop your file</h4>
+                        <p>Drag your PNG or click to browse</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-cog"></i>
+                        <h4>Set quality</h4>
+                        <p>Pick your preferred JPEG quality</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-magic"></i>
+                        <h4>Convert</h4>
+                        <p>Hit convert and wait a moment</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-download"></i>
+                        <h4>Download</h4>
+                        <p>Save your new JPEG file</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 PNG to JPEG Converter. Everything runs in your browser - no uploads required.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
