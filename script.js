@@ -2,8 +2,10 @@ class PNGToJPEGConverter {
     constructor() {
         this.selectedFile = null;
         this.convertedBlob = null;
+        this.currentUser = null;
         this.initializeElements();
         this.attachEventListeners();
+        this.checkAuthentication();
     }
 
     initializeElements() {
@@ -24,6 +26,10 @@ class PNGToJPEGConverter {
         this.errorMessage = document.getElementById('errorMessage');
         this.errorText = document.getElementById('errorText');
         this.successMessage = document.getElementById('successMessage');
+        this.authButtons = document.getElementById('authButtons');
+        this.userInfo = document.getElementById('userInfo');
+        this.userName = document.getElementById('userName');
+        this.logoutBtn = document.getElementById('logoutBtn');
     }
 
     attachEventListeners() {
@@ -47,6 +53,11 @@ class PNGToJPEGConverter {
         this.convertBtn.addEventListener('click', () => this.convertToJPEG());
         this.downloadBtn.addEventListener('click', () => this.downloadJPEG());
         this.resetBtn.addEventListener('click', () => this.resetConverter());
+        
+        // Auth buttons
+        if (this.logoutBtn) {
+            this.logoutBtn.addEventListener('click', () => this.logout());
+        }
     }
 
     handleDragOver(e) {
@@ -276,6 +287,55 @@ class PNGToJPEGConverter {
 
     hideSuccess() {
         this.successMessage.style.display = 'none';
+    }
+
+    // Authentication methods
+    async checkAuthentication() {
+        try {
+            const response = await fetch('backend/api/auth.php?action=check');
+            const data = await response.json();
+            
+            if (data.success && data.logged_in) {
+                this.currentUser = data.user;
+                this.showUserInfo();
+            } else {
+                this.showAuthButtons();
+            }
+        } catch (error) {
+            console.log('Not logged in');
+            this.showAuthButtons();
+        }
+    }
+
+    showUserInfo() {
+        if (this.authButtons) this.authButtons.style.display = 'none';
+        if (this.userInfo) {
+            this.userInfo.style.display = 'flex';
+            this.userName.textContent = this.currentUser.username;
+        }
+    }
+
+    showAuthButtons() {
+        if (this.userInfo) this.userInfo.style.display = 'none';
+        if (this.authButtons) this.authButtons.style.display = 'flex';
+    }
+
+    async logout() {
+        try {
+            const response = await fetch('backend/api/auth.php?action=logout');
+            const data = await response.json();
+            
+            if (data.success) {
+                this.currentUser = null;
+                this.showAuthButtons();
+                this.showSuccess('Logged out successfully');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
     }
 }
 
