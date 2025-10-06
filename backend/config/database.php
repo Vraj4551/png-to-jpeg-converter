@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = "your-rds-endpoint.region.rds.amazonaws.com";
+    private $host = "database-1.c3aoiacws04o.us-east-2.rds.amazonaws.com";
     private $db_name = "png_converter_db";
-    private $username = "your_username";
-    private $password = "your_password";
+    private $username = "admin";
+    private $password = "Vraj4551";
     private $conn;
 
     public function getConnection() {
